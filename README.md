@@ -17,7 +17,9 @@ NFC reader webservice, bringing NFCReader.py to web app use
 
 - git clone https://github.com/LudovicRousseau/pyscard.git
 - cd pyscard
-- sudo python setup.py install
+- sudo python setup.py build_ext install
+
+**important** the build_ext part is crucial
 
 ### Debian Jessie
 
