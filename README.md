@@ -6,6 +6,14 @@ NFC reader webservice, bringing NFCReader.py to web app use
 - python
 - pyscard : https://github.com/LudovicRousseau/pyscard
 
+## Installation 
+
+### Mac (tested under El Capitan only)
+
+There is an installer for pyscard here : http://ludovicrousseau.blogspot.fr/2014/07/pyscard-unofficial-version-1616.html
+
+### Debian Jessie
+
 ## Errors and how to solve them
 
 ### Crashes
