@@ -35,9 +35,15 @@ Example :
 ````
 
 - **smartcard.System python is not installed**
-Run "pip install pyscard" to install pyscard prerequisite
+You have not installed pyscard.
 
 - **ImportError: No module named scard**
+
+You may have used "pip install pyscard" or "python setup.py install" for pyscard installation. You have to do a full reinstallation with "sudo python setup.py build_ext install".
+
+- **smartcard.pcsc.PCSCExceptions.EstablishContextException: 'Failure to establish context: Service not available.'**
+
+Drivers for ACR122U NFC Reader are not installed on your computer.
 
 ## Copyrights
 
