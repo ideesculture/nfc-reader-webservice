@@ -10,7 +10,14 @@ NFC reader webservice, bringing NFCReader.py to web app use
 
 ### Mac (tested under El Capitan only)
 
-There is an installer for pyscard here : http://ludovicrousseau.blogspot.fr/2014/07/pyscard-unofficial-version-1616.html
+- install homebrew if not done
+- brew install swig git
+
+**important** do not use pip to install pyscard
+
+- git clone https://github.com/LudovicRousseau/pyscard.git
+- cd pyscard
+- sudo python setup.py install
 
 ### Debian Jessie
 
@@ -26,7 +33,9 @@ Example :
 ````
 
 - **smartcard.System python is not installed**
-pyscard - python for smart cards
+Run "pip install pyscard" to install pyscard prerequisite
+
+- **ImportError: No module named scard**
 
 ## Copyrights
 
