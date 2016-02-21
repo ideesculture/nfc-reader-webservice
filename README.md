@@ -21,6 +21,12 @@ NFC reader webservice, bringing NFCReader.py to web app use
 
 **important** the build_ext part is crucial
 
+- add apache user to sudoers with 'sudo visudo' and add the following line :
+
+````
+www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py,/usr/bin/python
+````
+
 ### Debian Jessie
 
 ## Errors and how to solve them
