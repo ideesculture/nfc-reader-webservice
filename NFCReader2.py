@@ -9,12 +9,9 @@ import datetime, sys
 #This command below is based on the "API Driver Manual of ACR122U NFC Contactless Smart Card Reader"
 COMMAND = [0xFF, 0xCA, 0x00, 0x00, 0x00] #handshake cmd needed to initiate data transfer
 
-# Disable the standard buzzer when a tag is detected, Source : https://gist.github.com/nixme/2717287
-DISABLEBEEP = [0xFF, 0x00, 0x52, 0x00, 0x00]
-
 # get all the available readers
 r = readers()
-print "Available readers:", r
+#print "Available readers:", r
 
 def stringParser(dataCurr):
 #--------------String Parser--------------#
@@ -45,7 +42,6 @@ def readTag(page):
         try:
             connection = reader.createConnection()
             status_connection = connection.connect()
-            connection.transmit(DISABLEBEEP)
             connection.transmit(COMMAND)
             #Read command [FF, B0, 00, page, #bytes]
             resp = connection.transmit([0xFF, 0xB0, 0x00, int(page), 0x04])
@@ -54,20 +50,23 @@ def readTag(page):
             #only allows new tags to be worked so no duplicates
             if(dataCurr is not None):
                 print dataCurr
-            else:
-                print "Something went wrong. Page " + str(page)
-        except Exception,e: print str(e)
+            #else:
+                #print "Something went wrong. Page " + str(page)
+                #break
+        except Exception,e: 
+        	1+1
+        	#break
+        	#print str(e)
 
 def writeTag(page, value):
     if type(value) != str:
-        print "Value input should be a string"
+        #print "Value input should be a string"
         exit()
     while(1):
         if len(value) == 8:
             try:
                 connection = reader.createConnection()
                 status_connection = connection.connect()
-                connection.transmit(DISABLEBEEP)
                 connection.transmit(COMMAND)
                 WRITE_COMMAND = [0xFF, 0xD6, 0x00, int(page), 0x04, int(value[0:2], 16), int(value[2:4], 16), int(value[4:6], 16), int(value[6:8], 16)]
                 # Let's write a page Page 9 is usually 00000000
@@ -98,13 +97,13 @@ if __name__ == "__main__":
         usingreader = args.usingreader[0]
         if (int(usingreader) >= 0 and int(usingreader) <= len(r)-1):
             reader = r[int(usingreader)]
-            print "Using: [",int(usingreader),"]", reader
+            #print "Using: [",int(usingreader),"]", reader
         else:
             reader = r[0]
-            print "Using: [ 0 ]", reader
+            #print "Using: [ 0 ]", reader
     else:
         reader = r[0]
-        print "Using: [ 0 ]", reader
+        #print "Using: [ 0 ]", reader
 
 
 
