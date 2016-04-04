@@ -29,6 +29,14 @@ www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py
 
 ### Debian Jessie
 
+````
+cd ~ 
+apt-get install git swig python-setuptools libpcsclite-dev python-dev
+git clone https://github.com/LudovicRousseau/pyscard.git
+cd pyscard/
+python setup.py build_ext install
+````
+
 ## Errors and how to solve them
 
 ### Crashes
