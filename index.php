@@ -15,16 +15,16 @@
 		501 => 'Not Implemented',
 	);
 
-	// set the status
-	$status_header = 'HTTP/1.1 200 '.$status.' '.$codes[$status];
-	header($status_header);
-
 	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-	header("Access-Control-Allow-Headers: Authorization");
+	header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
 	header('Content-type: ' . $content_type);
+	// set the status
+	$status_header = 'HTTP/1.1 '.$status.' '.$codes[$status];
+	header($status_header);
 
-	if(!$_POST) {
+
+	if($_GET["write"] != 1 ) {
 
 		// Get mode : reading value from NFC chip
 		$vs_reading_line = 8;
@@ -89,7 +89,7 @@
 	} else {
 		// Post mode : writing value to NFC chip
 
-		$value = $_POST["value"];
+		$value = $_GET["value"];
 
 		$vs_writing_line = 8;
 		if (isset($_GET["line"]) && $_GET["line"] >= 0 && $_GET["line"] <= 8) {
@@ -100,7 +100,7 @@
 			$vs_usingreader = " --usingreader " . $_GET["usingreader"];
 		}
 
-		$vs_command = "python NFCReader.py --write ". $vs_writing_line." ".$value. $vs_usingreader . " 2>&1";
+		$vs_command = "python NFCReader.py --write ". str_pad($vs_writing_line, 8)." ".$value. $vs_usingreader . " 2>&1";
 		if (PHP_OS == "Darwin") {
 			$vs_command = "sudo " . $vs_command;
 		}
