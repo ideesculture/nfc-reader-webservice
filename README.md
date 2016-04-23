@@ -31,7 +31,7 @@ www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py
 
 ````
 cd ~ 
-apt-get install git swig python-setuptools libpcsclite-dev python-dev
+apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2
 git clone https://github.com/LudovicRousseau/pyscard.git
 cd pyscard/
 python setup.py build_ext install
@@ -42,6 +42,13 @@ disable pn533 and nfc driver from the kernel
 ````
 echo "install nfc /bin/false" >> /etc/modprobe.d/blacklist.conf
 echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
+````
+
+install nfc-reader-webservice
+
+````
+cd ~
+git clone
 ````
 
 ## Errors and how to solve them
