@@ -31,7 +31,7 @@ www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py
 
 ````
 cd ~ 
-apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2
+apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd
 git clone https://github.com/LudovicRousseau/pyscard.git
 cd pyscard/
 python setup.py build_ext install
@@ -42,6 +42,14 @@ disable pn533 and nfc driver from the kernel
 ````
 echo "install nfc /bin/false" >> /etc/modprobe.d/blacklist.conf
 echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
+````
+
+**important** : reboot at this step, as we will need to start pcscd and it needs to have those modules disables
+
+launch pcscd if it is not already started
+
+````
+pcscd &
 ````
 
 install nfc-reader-webservice
