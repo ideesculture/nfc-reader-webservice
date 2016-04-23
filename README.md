@@ -82,6 +82,35 @@ go to the end file, and type in those lines
 
 and save.
 
+create an apache vhost for nfc-reader-webservice.dev
+````
+editor /etc/apache2/sites-available/010-nfc-reader-webservice.dev.conf
+````
+
+copy and customize this content if needed : 
+````
+<VirtualHost *:80>
+ServerAdmin webmaster@localhost
+DocumentRoot /var/www/html/nfc-reader-webservice
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+<Directory "/var/www/html/nfc-reader-webservice">
+AllowOverride None
+Order Allow,Deny
+Allow from All
+</Directory>
+</VirtualHost>
+````
+
+activate the vhost
+
+````
+cd /etc/apache2/sites-available
+a2ensite 010-nfc-reader-webservice.dev.conf
+````
+
 Now you can use http://nfc-reader-webservice.dev/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
 
 ## Errors and how to solve them
