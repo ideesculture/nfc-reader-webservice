@@ -109,6 +109,7 @@ activate the vhost
 ````
 cd /etc/apache2/sites-available
 a2ensite 010-nfc-reader-webservice.dev.conf
+service apache2 reload
 ````
 
 Now you can use http://nfc-reader-webservice.dev/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
