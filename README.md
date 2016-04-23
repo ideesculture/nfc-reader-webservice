@@ -47,9 +47,20 @@ echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
 install nfc-reader-webservice
 
 ````
-cd ~
-git clone
+cd /var/www/html
+git clone https://github.com/ideesculture/nfc-reader-webservice.git
 ````
+
+test (command line)
+
+````
+cd /var/www/html/nfc-reader-webservice
+python NFCReader.py --read 8
+````
+
+test (browser) : go to http://localhost/nfc-reader-webservice
+
+
 
 ## Errors and how to solve them
 
