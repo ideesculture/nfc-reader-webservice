@@ -68,7 +68,21 @@ python NFCReader.py --read 8
 
 test (browser) : go to http://localhost/nfc-reader-webservice
 
+**recommended** : create a local dns name you can use inside your code and affect to each computer that will have a NFC reader
 
+````
+nano /etc/hosts
+````
+
+go to the end file, and type in those lines
+
+````
+127.0.0.1 nfc-reader-webservice.dev
+````
+
+and save.
+
+Now you can use http://nfc-reader-webservice.dev/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
 
 ## Errors and how to solve them
 
