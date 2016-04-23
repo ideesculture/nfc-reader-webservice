@@ -39,9 +39,10 @@ python setup.py build_ext install
 
 disable pn533 and nfc driver from the kernel
 
+````
 echo "install nfc /bin/false" >> /etc/modprobe.d/blacklist.conf
 echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
-
+````
 
 ## Errors and how to solve them
 
