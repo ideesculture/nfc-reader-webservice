@@ -99,6 +99,7 @@ copy and customize this content if needed :
 ````
 <VirtualHost *:80>
 ServerAdmin webmaster@localhost
+ServerName nfc-reader-webservice.dev
 DocumentRoot /var/www/html/nfc-reader-webservice
 
 ErrorLog ${APACHE_LOG_DIR}/error.log
