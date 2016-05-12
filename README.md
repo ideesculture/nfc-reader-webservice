@@ -123,6 +123,10 @@ service apache2 reload
 
 Now you can use http://nfc-reader-webservice.dev/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
 
+````
+curl http://nfc-reader-webservice.dev/?line=1
+````
+
 ## Errors and how to solve them
 
 ### Crashes
