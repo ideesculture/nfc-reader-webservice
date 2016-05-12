@@ -27,11 +27,19 @@ NFC reader webservice, bringing NFCReader.py to web app use
 www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py
 ````
 
-### Debian Jessie
+### Debian Jessie, Ubuntu 16.04
+
+Install all the prerequisites through apt-get, you will need to be root at this step.
+For some of the next steps too, please check with/without being root if you are stuck somewhere.
+
+````
+apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd
+````
+
+You will need pyscard. As the version is easier from LudovicRousseau github repo, I recommend it to you.
 
 ````
 cd ~ 
-apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd
 git clone https://github.com/LudovicRousseau/pyscard.git
 cd pyscard/
 python setup.py build_ext install
