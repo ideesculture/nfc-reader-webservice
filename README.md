@@ -33,7 +33,7 @@ Install all the prerequisites through apt-get, you will need to be root at this 
 For some of the next steps too, please check with/without being root if you are stuck somewhere.
 
 ````
-apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd php
+apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd php libapache2-mod-php 
 ````
 
 You will need pyscard. As the version is easier from LudovicRousseau github repo, I recommend it to you.
