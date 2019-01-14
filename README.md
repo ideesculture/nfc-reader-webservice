@@ -21,11 +21,6 @@ NFC reader webservice, bringing NFCReader.py to web app use
 
 **important** the build_ext part is crucial
 
-- add apache user to sudoers with 'sudo visudo' and add the following line :
-
-````
-www-data      ALL=(ALL) NOPASSWD:/path/to/nfc-reader-webservice/NFCReader.py
-````
 
 ### Debian Jessie, Ubuntu 16.04
 
@@ -33,7 +28,7 @@ Install all the prerequisites through apt-get, you will need to be root at this 
 For some of the next steps too, please check with/without being root if you are stuck somewhere.
 
 ````
-apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc apache2 pcscd php libapache2-mod-php 
+apt-get install git swig python-setuptools libpcsclite-dev python-dev gcc pcscd
 ````
 
 You will need pyscard. As the version is easier from LudovicRousseau github repo, I recommend it to you.
@@ -63,18 +58,26 @@ pcscd &
 install nfc-reader-webservice
 
 ````
-cd /var/www/html
+mkdir -p /opt
+cd /opt
 git clone https://github.com/ideesculture/nfc-reader-webservice.git
 ````
 
 test (command line)
 
 ````
-cd /var/www/html/nfc-reader-webservice
+cd /opt/nfc-reader-webservice
 python NFCReader.py --read 8
 ````
 
-test (browser) : go to http://localhost/nfc-reader-webservice
+run (python server) on port 81
+
+````
+cd /opt/nfc-reader-webservice
+python NFCReader_webservice.py 81
+````
+
+test (browser) : go to http://localhost:81
 
 **recommended** : create a local dns name you can use inside your code and affect to each computer that will have a NFC reader
 
@@ -90,41 +93,11 @@ go to the end file, and type in those lines
 
 and save.
 
-create an apache vhost for nfc-reader-webservice.dev
-````
-editor /etc/apache2/sites-available/010-nfc-reader-webservice.dev.conf
-````
 
-copy and customize this content if needed : 
-````
-<VirtualHost *:80>
-ServerAdmin webmaster@localhost
-ServerName nfc-reader-webservice.dev
-DocumentRoot /var/www/html/nfc-reader-webservice
-
-ErrorLog ${APACHE_LOG_DIR}/error.log
-CustomLog ${APACHE_LOG_DIR}/access.log combined
-
-<Directory "/var/www/html/nfc-reader-webservice">
-AllowOverride None
-Order Allow,Deny
-Allow from All
-</Directory>
-</VirtualHost>
-````
-
-activate the vhost
+Now you can use http://nfc-reader-webservice.dev:81/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
 
 ````
-cd /etc/apache2/sites-available
-a2ensite 010-nfc-reader-webservice.dev.conf
-service apache2 reload
-````
-
-Now you can use http://nfc-reader-webservice.dev/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
-
-````
-curl http://nfc-reader-webservice.dev/?line=1
+curl http://nfc-reader-webservice.dev:81/?line=1
 ````
 
 ## Errors and how to solve them
