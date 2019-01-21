@@ -14,7 +14,7 @@ DISABLEBEEP = [0xFF, 0x00, 0x52, 0x00, 0x00]
 
 # get all the available readers
 r = readers()
-print "Available readers:", r
+print("Available readers:", r )
 
 def stringParser(dataCurr):
 #--------------String Parser--------------#
@@ -53,14 +53,15 @@ def readTag(page):
 
             #only allows new tags to be worked so no duplicates
             if(dataCurr is not None):
-                print dataCurr
+                print(dataCurr)
             else:
-                print "Something went wrong. Page " + str(page)
-        except Exception,e: print str(e)
+                print("Something went wrong. Page " + str(page))
+        except: 
+            print("Exception")
 
 def writeTag(page, value):
     if type(value) != str:
-        print "Value input should be a string"
+        print("Value input should be a string" )
         exit()
     while(1):
         if len(value) == 8:
@@ -73,12 +74,12 @@ def writeTag(page, value):
                 # Let's write a page Page 9 is usually 00000000
                 resp = connection.transmit(WRITE_COMMAND)
                 if resp[1] == 144:
-                    print "Wrote " + value + " to page " + str(page)
+                    print("Wrote " + value + " to page " + str(page))
                     break
-            except Exception, e:
+            except:
                 continue
         else:
-            print "Must have a full 4 byte write value"
+            print("Must have a full 4 byte write value" )
             break
 
 if __name__ == "__main__":
@@ -98,13 +99,13 @@ if __name__ == "__main__":
         usingreader = args.usingreader[0]
         if (int(usingreader) >= 0 and int(usingreader) <= len(r)-1):
             reader = r[int(usingreader)]
-            print "Using: [",int(usingreader),"]", reader
+            print("Using: [",int(usingreader),"]", reader )
         else:
             reader = r[0]
-            print "Using: [ 0 ]", reader
+            print("Using: [ 0 ]", reader )
     else:
         reader = r[0]
-        print "Using: [ 0 ]", reader
+        print("Using: [ 0 ]", reader )
 
 
 
