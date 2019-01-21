@@ -49,11 +49,11 @@ def readTag(page):
 
             #only allows new tags to be worked so no duplicates
             if(dataCurr is not None):
-                print dataCurr
+                print(dataCurr)
             #else:
                 #print "Something went wrong. Page " + str(page)
                 #break
-        except Exception,e: 
+        except: 
         	1+1
         	#break
         	#print str(e)
@@ -72,12 +72,12 @@ def writeTag(page, value):
                 # Let's write a page Page 9 is usually 00000000
                 resp = connection.transmit(WRITE_COMMAND)
                 if resp[1] == 144:
-                    print "Wrote " + value + " to page " + str(page)
+                    print("Wrote " + value + " to page " + str(page))
                     break
-            except Exception, e:
+            except:
                 continue
         else:
-            print "Must have a full 4 byte write value"
+            print("Must have a full 4 byte write value")
             break
 
 if __name__ == "__main__":
