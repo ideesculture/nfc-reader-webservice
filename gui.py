@@ -1,6 +1,8 @@
 #!/bin/bash
 # -*- coding: UTF-8 -*-
 from tkinter import *
+from tkinter import messagebox
+
 import random
 #from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 #import SocketServer
@@ -24,24 +26,39 @@ reader = r[0]
 result = ""
 
 
-def readTagWindow():
-	result = readTag(7)
-	if (result is None):
-		result = readTag(7)
-	if (result is None):
-		result = readTag(7)
-	if (result is None):
-		result = readTag(7)
-	if (result is None):
-		result = readTag(7)
-	if (result is None):
-		result = readTag(7)
-	if (result is None):
-		Texte.set('Erreur de lecture')
-	else:
-		nb = random.randint(1,6)
-		Texte.set('Résultat -> ' + str(result))
+def readTagObjectWindow():
+    result = readTag(7)
+    if (result is None):
+        result = readTag(7)
+    if (result is None):
+        result = readTag(7)
+    if (result is None):
+        result = readTag(7)
+    if (result is None):
+        result = readTag(7)
+    if (result is None):
+        result = readTag(7)
+    if (result is None):
+        messagebox.showinfo('NFC', 'erreur')
+    else:
+        messagebox.showinfo('NFC', "La puce contient l'objet "+str(result))
 
+def readTagPlayerWindow():
+    result = readTag(8)
+    if (result is None):
+        result = readTag(8)
+    if (result is None):
+        result = readTag(8)
+    if (result is None):
+        result = readTag(8)
+    if (result is None):
+        result = readTag(8)
+    if (result is None):
+        result = readTag(8)
+    if (result is None):
+        messagebox.showinfo('NFC', 'erreur')
+    else:
+        messagebox.showinfo('NFC', "La puce contient le joueur "+str(result))
 
 def stringParser(dataCurr):
 #--------------String Parser--------------#
@@ -111,24 +128,56 @@ def writeTag(page, value):
 # Création de la fenêtre principale (main window)
 Mafenetre = Tk()
 
-Mafenetre.title('Dé à 6 faces')
-Mafenetre.geometry('300x100+400+400')
+Mafenetre.title('Lecture/écriture badges Zoodéfis')
+#Mafenetre.geometry('700x100+200+200')
+Mafenetre.rowconfigure(0, weight=1)
+Mafenetre.columnconfigure(0, weight=1)
 
 # Création d'un widget Button (bouton Lancer)
-BoutonLancer = Button(Mafenetre, text ='Actualiser', command = readTagWindow)
+BoutonLancer = Button(Mafenetre, text ='Lire la puce objet', command = readTagObjectWindow)
 # Positionnement du widget avec la méthode pack()
-BoutonLancer.pack(side = LEFT, padx = 5, pady = 2)
+#BoutonLancer.pack(side = LEFT, padx = 5, pady = 2)
+BoutonLancer.grid(row=0, column=0, sticky="nsew")
+
+# Création d'un widget Button (bouton Lancer)
+BoutonLancerJoueur = Button(Mafenetre, text ='Lire la puce joueur', command = readTagPlayerWindow)
+# Positionnement du widget avec la méthode pack()
+#BoutonLancerJoueur.pack(side = LEFT, padx = 5, pady = 2)
+BoutonLancerJoueur.grid(row=1, column=0, sticky="nsew")
+
+txt = Entry(Mafenetre,width=10)
+#txt.pack(side = LEFT, padx = 0, pady = 10)
+txt.grid(row=2, column=0, sticky="nsew")
+
+def writeTagObjectWindow():
+    value = str(txt.get());
+    writeTag(7, value);
+    messagebox.showinfo('NFC', "L'objet : "+value+" a été écrit")
+    #break
+
+def writeTagPlayerWindow():
+    value = str(txt.get());
+    writeTag(8, value);
+    messagebox.showinfo('NFC', "Le joueur : "+value+" a été écrit")
+    #break
+
+BoutonEcrire = Button(Mafenetre, text ='Ecrire la puce objet', command = writeTagObjectWindow)
+# Positionnement du widget avec la méthode pack()
+#BoutonEcrire.pack(side = LEFT, padx = 5, pady = 2)
+BoutonEcrire.grid(row=3, column=0, sticky="nsew")
+
+BoutonEcrireJoueur = Button(Mafenetre, text ='Ecrire la puce joueur', command = writeTagPlayerWindow)
+# Positionnement du widget avec la méthode pack()
+#BoutonEcrireJoueur.pack(side = LEFT, padx = 5, pady = 2)
+BoutonEcrireJoueur.grid(row=4, column=0, sticky="nsew")
 
 # Création d'un widget Button (bouton Quitter)
 BoutonQuitter = Button(Mafenetre, text ='Quitter', command = Mafenetre.destroy)
-BoutonQuitter.pack(side = RIGHT, padx = 5, pady = 10)
+#BoutonQuitter.pack(side = RIGHT, padx = 5, pady = 10)
+BoutonQuitter.grid(row=6, column=0, sticky="nsew")
 
 Texte = StringVar()
-readTagWindow()
-
-# Création d'un widget Label (texte 'Résultat -> x')
-LabelResultat = Label(Mafenetre, textvariable = Texte, fg ='red', bg ='white')
-LabelResultat.pack(side = LEFT, padx = 5, pady = 5)
+#readTagWindow()
 
 Mafenetre.mainloop()
 
