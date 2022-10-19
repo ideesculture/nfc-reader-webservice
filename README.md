@@ -96,7 +96,8 @@ Register the script to be run at boot automatically :
 
 ```
 cd /etc/init.d
-update-rc.d superscript defaults
+chmod +x superscript.sh
+update-rc.d superscript.sh defaults
 ```
 
 ## Errors and how to solve them
