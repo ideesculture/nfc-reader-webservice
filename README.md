@@ -87,7 +87,9 @@ curl http://127.0.0.1:9010/?line=1
 
 Create a superscript.sh file :
 
-``` nano /etc/init.d/superscript.sh ````
+```
+nano /etc/init.d/superscript.sh
+```
 
 With the following content :
 
