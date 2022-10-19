@@ -67,7 +67,7 @@ python NFCReader.py --read 8
 run (python server) on port 9010
 
 ````
-cd /opt/nfc-reader-webservice
+cd /var/www/html/nfc-reader-webservice
 python NFCReader_webservice.py 9010
 ````
 
