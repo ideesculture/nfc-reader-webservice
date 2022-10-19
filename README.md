@@ -49,17 +49,11 @@ echo "install pn533 /bin/false" >> /etc/modprobe.d/blacklist.conf
 
 **important** : reboot at this step, as we will need to start pcscd and it needs to have those modules disables
 
-launch pcscd if it is not already started
-
-````
-pcscd &
-````
-
 install nfc-reader-webservice
 
 ````
-mkdir -p /opt
-cd /opt
+mkdir -p /var/www/html
+cd /var/www/html
 git clone https://github.com/ideesculture/nfc-reader-webservice.git
 ````
 
