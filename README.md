@@ -70,35 +70,38 @@ cd /opt/nfc-reader-webservice
 python NFCReader.py --read 8
 ````
 
-run (python server) on port 81
+run (python server) on port 9010
 
 ````
 cd /opt/nfc-reader-webservice
-python NFCReader_webservice.py 81
+python NFCReader_webservice.py 9010
 ````
 
-test (browser) : go to http://localhost:81
+test (browser) : go to http://127.0.0.1:9010
 
-**recommended** : create a local dns name you can use inside your code and affect to each computer that will have a NFC reader
-
+test (terminal) : use curl to test
 ````
-nano /etc/hosts
+curl http://127.0.0.1:9010/?line=1
 ````
+## Run as service
 
-go to the end file, and type in those lines
+Create a superscript.sh file :
 
-````
-127.0.0.1 nfc-reader-webservice.dev
-````
+``` nano /etc/init.d/superscript.sh ````
 
-and save.
+With the following content :
 
+```
+#!/bin/bash
+cd /var/www/html/nfc-reader-webservice && python NFCReader_webservice.py 9010
+```
 
-Now you can use http://nfc-reader-webservice.dev:81/?line=1 (with line as the number of a 4 bytes line you want to read on the NFC chip).
+Register the script to be run at boot automatically :
 
-````
-curl http://nfc-reader-webservice.dev:81/?line=1
-````
+```
+cd /etc/init.d
+update-rc.d superscript defaults
+```
 
 ## Errors and how to solve them
 
@@ -127,5 +130,4 @@ Drivers for ACR122U NFC Reader are not installed on your computer.
 - Nfc-reader-webservice embeds StevenTso ACS ACR122U NFC Reader / Writer python code. 
 https://github.com/StevenTso/ACS-ACR122U-NFC-Reader - MIT License
 
-- all other code : Gautier Michelin (idéesculture), GNU GPL v3, that implies all derivatives go to the same license :-) Please note that this doesn't apply 
-to StevenTso ACS ACR122U NFC Reader / Writer python code embedded.
+- all other code : Gautier Michelin (idéesculture), GNU GPL v3, that implies all derivatives go to the same license :-) Please note that this doesn't apply to StevenTso ACS ACR122U NFC Reader / Writer python code embedded.
