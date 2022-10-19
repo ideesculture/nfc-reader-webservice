@@ -60,11 +60,11 @@ git clone https://github.com/ideesculture/nfc-reader-webservice.git
 test (command line)
 
 ````
-cd /opt/nfc-reader-webservice
+cd /var/www/html/nfc-reader-webservice
 python NFCReader.py --read 8
 ````
 
-run (python server) on port 9010
+run **python server** on port 9010
 
 ````
 cd /var/www/html/nfc-reader-webservice
